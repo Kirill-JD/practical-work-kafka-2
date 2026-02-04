@@ -54,9 +54,9 @@ public class SingleMessageConsumer implements MessageConsumer {
     private Properties getConsumerProperties() {
         Properties props = new Properties();
         // Адреса брокеров Kafka для локального прогона
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093,localhost:9094");
         // Адреса брокеров Kafka для docker
-//        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka1:29092,kafka2:29093,kafka3:29094");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka1:29092,kafka2:29093,kafka3:29094");
         // Уникальный идентификатор группы
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "single-consumer-group");
         // Десериализация ключа

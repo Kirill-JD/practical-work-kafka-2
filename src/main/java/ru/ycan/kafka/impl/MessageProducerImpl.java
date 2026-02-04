@@ -43,11 +43,17 @@ public class MessageProducerImpl implements MessageProducer {
     private static Properties getProducerProperties() {
         // Конфигурация продюсера – адрес сервера, сериализаторы для ключа и значения, .
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-//        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka1:29092,kafka2:29093,kafka3:29094");
+        // Адреса брокеров Kafka для локального прогона
+//        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9093,localhost:9094");
+        // Адреса брокеров Kafka для docker
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka1:29092,kafka2:29093,kafka3:29094");
+        // Сериализация ключа
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        // Сериализация значения
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class.getName());
+        // Подтверждение от брокеров. all - ждёт от всех (не только от лидера)
         props.put(ProducerConfig.ACKS_CONFIG, "all");
+        // Кол-во повторных попыток отправки сообщения
         props.put(ProducerConfig.RETRIES_CONFIG, "3");
         return props;
     }

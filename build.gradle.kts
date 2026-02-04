@@ -26,3 +26,13 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+tasks.jar {
+    manifest {
+        from("src/main/resources/META-INF/MANIFEST.MF")
+    }
+    from(configurations.runtimeClasspath.get().map {
+        if (it.isDirectory) it else zipTree(it)
+    })
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
