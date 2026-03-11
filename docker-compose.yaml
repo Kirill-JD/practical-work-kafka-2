@@ -1,0 +1,12 @@
+version: '3.8'
+
+networks:
+  default:
+    name: kafka-net
+    external: true
+
+services:
+  app:
+    build: .
+    deploy:
+      replicas: 2
